@@ -26,7 +26,7 @@ source_set("metrics") {
     "//content/public/common",
   ]
 
-  if (is_linux) {
+  if (is_linux || is_bsd) {
     sources += [
       "external_metrics.cc",
       "external_metrics.h",

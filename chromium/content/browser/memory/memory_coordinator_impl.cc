@@ -116,8 +116,12 @@ void RecordMetricsOnStateChange(base::MemoryState prev_state,
 struct MemoryCoordinatorSingletonTraits
     : public base::LeakySingletonTraits<MemoryCoordinator> {
   static MemoryCoordinator* New() {
+#if defined(OS_BSD)
+    return NULL;
+#else
     return new MemoryCoordinatorImpl(base::ThreadTaskRunnerHandle::Get(),
                                      CreateMemoryMonitor());
+#endif
   }
 };
 

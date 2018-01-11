@@ -394,6 +394,7 @@ void GpuChildThread::OnCollectGraphicsInfo() {
   if (dead_on_arrival_)
     return;
 
+#if !defined(OS_BSD)
 #if defined(OS_WIN)
   // GPU full info collection should only happen on un-sandboxed GPU process
   // or single process/in-process gpu mode on Windows.
@@ -445,6 +446,7 @@ void GpuChildThread::OnCollectGraphicsInfo() {
     base::MessageLoop::current()->QuitWhenIdle();
   }
 #endif  // OS_WIN
+#endif  // XXX(rene) !FreeBSD
 }
 
 void GpuChildThread::OnGetVideoMemoryUsageStats() {

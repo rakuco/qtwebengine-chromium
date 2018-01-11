@@ -88,6 +88,9 @@ const WebsiteSettingsInfo* WebsiteSettingsRegistry::Register(
   // doesn't allow the settings to be managed in the same way. See
   // crbug.com/642184.
   sync_status = WebsiteSettingsInfo::UNSYNCABLE;
+#elif defined(OS_BSD)
+  if (!(platform & PLATFORM_BSD))
+    return nullptr;
 #else
 #error "Unsupported platform"
 #endif

@@ -206,7 +206,7 @@ source_set("audio") {
     deps += [ "//media/base/android:media_jni_headers" ]
   }
 
-  if (is_linux) {
+  if (is_linux || is_bsd) {
     sources += [ "linux/audio_manager_linux.cc" ]
   }
 
@@ -255,9 +255,11 @@ source_set("audio") {
       configs += [ ":libpulse" ]
     } else {
       # TODO(ajwong): Technically, this dl should go in the action.
-      libs += [ "dl" ]
       deps += [ ":pulse_generate_stubs" ]
       sources += get_target_outputs(":pulse_generate_stubs")
+    }
+    if (is_linux) {
+      libs += [ "dl" ]
     }
   }
 

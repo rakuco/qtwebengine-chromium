@@ -348,7 +348,7 @@ config("toolchain") {
   # TODO(jochen): Add support for compiling with simulators.
 
   if (is_debug) {
-    if (is_linux && v8_enable_backtrace) {
+    if ((is_linux || is_bsd) && v8_enable_backtrace) {
       ldflags += [ "-rdynamic" ]
     }
 
@@ -2282,7 +2282,7 @@ v8_component("v8_libbase") {
     sources += [ "src/base/platform/platform-posix.cc" ]
   }
 
-  if (is_linux) {
+  if (is_linux && !is_bsd) {
     sources += [
       "src/base/debug/stack_trace_posix.cc",
       "src/base/platform/platform-linux.cc",
@@ -2292,6 +2292,12 @@ v8_component("v8_libbase") {
       "dl",
       "rt",
     ]
+  } else if (is_bsd) {
+    sources += [
+      "src/base/debug/stack_trace_posix.cc",
+      "src/base/platform/platform-freebsd.cc",
+    ]
+    libs = [ "rt", "execinfo" ]
   } else if (is_android) {
     if (current_toolchain == host_toolchain) {
       libs = [
@@ -2429,6 +2435,7 @@ if (current_toolchain == v8_snapshot_toolchain) {
     sources = [
       "src/snapshot/mksnapshot.cc",
     ]
+    libs = [ "execinfo" ]
 
     configs = [ ":internal_config" ]
 

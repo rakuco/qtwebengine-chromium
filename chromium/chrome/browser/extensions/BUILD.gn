@@ -1024,7 +1024,7 @@ static_library("extensions") {
     sources -= [ "global_shortcut_listener_ozone.cc" ]
   }
 
-  if (is_linux) {
+  if (is_linux || is_bsd) {
     deps += [ "//build/linux:fontconfig" ]
 
     if (use_dbus) {
@@ -1113,6 +1113,12 @@ static_library("extensions") {
 
   if (enable_hotwording) {
     defines += [ "ENABLE_HOTWORDING" ]
+  }
+
+  if (is_bsd) {
+    sources -= [
+      "api/image_writer_private/removable_storage_provider_linux.cc",
+    ]
   }
 
   if (enable_service_discovery) {

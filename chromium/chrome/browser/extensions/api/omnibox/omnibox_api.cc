@@ -45,7 +45,7 @@ const char kBackgroundTabDisposition[] = "newBackgroundTab";
 // Pref key for omnibox.setDefaultSuggestion.
 const char kOmniboxDefaultSuggestion[] = "omnibox_default_suggestion";
 
-#if defined(OS_LINUX)
+#if defined(OS_LINUX) || defined(OS_BSD)
 static const int kOmniboxIconPaddingLeft = 2;
 static const int kOmniboxIconPaddingRight = 2;
 #elif defined(OS_MACOSX)

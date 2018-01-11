@@ -120,7 +120,7 @@ source_set("browser") {
     "//ui/gl",
   ]
 
-  if (is_linux) {
+  if (is_linux || is_bsd) {
     sources += [
       "cast_memory_pressure_monitor.cc",
       "cast_memory_pressure_monitor.h",

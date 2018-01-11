@@ -303,7 +303,7 @@ static_library("run_all_base_unittests") {
   ]
 }
 
-if (is_linux) {
+if (is_linux || is_bsd) {
   shared_library("malloc_wrapper") {
     testonly = true
     sources = [

@@ -206,10 +206,12 @@
 #include "content/common/external_ipc_dumper.h"
 #endif
 
+#if !defined(OS_BSD)
 #if defined(OS_MACOSX)
 #include <malloc/malloc.h>
 #else
 #include <malloc.h>
+#endif
 #endif
 
 using base::ThreadRestrictions;
@@ -1489,7 +1491,7 @@ media::GpuVideoAcceleratorFactories* RenderThreadImpl::GetGpuFactories() {
   const bool enable_video_accelerator =
       !cmd_line->HasSwitch(switches::kDisableAcceleratedVideoDecode);
   const bool enable_gpu_memory_buffer_video_frames =
-#if defined(OS_MACOSX) || defined(OS_LINUX)
+#if defined(OS_MACOSX) || defined(OS_LINUX) || defined(OS_BSD)
       !cmd_line->HasSwitch(switches::kDisableGpuMemoryBufferVideoFrames) &&
       !cmd_line->HasSwitch(switches::kDisableGpuCompositing) &&
       !gpu_channel_host->gpu_info().software_rendering;
@@ -1847,6 +1849,8 @@ void RenderThreadImpl::RecordPurgeAndSuspendMetrics() const {
 #else
   size_t malloc_usage = minfo.hblkhd + minfo.arena;
 #endif
+#elif defined(OS_BSD)
+  size_t malloc_usage = 0;
 #else
   size_t malloc_usage = GetMallocUsage();
 #endif

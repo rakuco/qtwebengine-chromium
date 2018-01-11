@@ -208,7 +208,7 @@ void Context::Init(std::unique_ptr<InitParams> init_params) {
       tracing::mojom::StartupPerformanceDataCollectorPtr collector;
       ConnectToInterface(service_manager(), source_identity, tracing_identity,
                          &collector);
-#if defined(OS_MACOSX) || defined(OS_WIN) || defined(OS_LINUX)
+#if defined(OS_MACOSX) || defined(OS_WIN) || defined(OS_LINUX) || defined(OS_BSD)
       // CurrentProcessInfo::CreationTime is only defined on some platforms.
       const base::Time creation_time = base::CurrentProcessInfo::CreationTime();
       collector->SetServiceManagerProcessCreationTime(

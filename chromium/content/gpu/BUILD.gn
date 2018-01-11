@@ -102,6 +102,7 @@ target(link_target_type, "gpu_sources") {
 
   if (use_x11) {
     deps += [ "//ui/events/platform/x11" ]
+    configs += [ "//build/config/linux:x11" ]
   }
 
   if (use_ozone) {

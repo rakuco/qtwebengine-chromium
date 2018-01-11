@@ -117,7 +117,7 @@ if (is_chromeos) {
     "wallpaper.json",
     "wallpaper_private.json",
   ]
-} else if (is_linux || is_win) {
+} else if (is_linux || is_bsd || is_win) {
   schema_sources += [ "input_ime.json" ]
 }
 if (enable_service_discovery) {

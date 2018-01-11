@@ -650,7 +650,6 @@ rtc_static_library("rtc_base") {
       "x11windowpicker.h",
     ]
     libs += [
-      "dl",
       "rt",
       "Xext",
       "X11",

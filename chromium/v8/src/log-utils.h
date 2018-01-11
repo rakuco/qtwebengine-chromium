@@ -14,6 +14,8 @@
 #include "src/base/platform/mutex.h"
 #include "src/flags.h"
 
+#include <stdarg.h>
+
 namespace v8 {
 namespace internal {
 

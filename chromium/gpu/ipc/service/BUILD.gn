@@ -104,11 +104,12 @@ target(link_target_type, "ipc_service_sources") {
     ]
     libs += [ "android" ]
   }
-  if (is_linux && ui_compositor_image_transport) {
+  if ((is_linux || is_bsd) && ui_compositor_image_transport) {
     sources += [ "image_transport_surface_linux.cc" ]
   }
   if (use_x11) {
     sources += [ "x_util.h" ]
+    configs += [ "//build/config/linux:x11" ]
   }
   if (use_ozone) {
     sources += [

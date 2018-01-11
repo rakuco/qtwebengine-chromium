@@ -207,7 +207,7 @@ test("compositor_unittests") {
     "//ui/gl",
     "//ui/resources",
   ]
-  if (is_linux) {
+  if (is_linux || is_bsd) {
     deps += [ "//third_party/mesa:osmesa" ]
   }
 }

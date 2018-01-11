@@ -91,7 +91,7 @@ component("mus") {
     "//ui/wm",
   ]
 
-  if (is_linux && !is_android) {
+  if ((is_linux || is_bsd) && !is_android) {
     deps += [ "//components/font_service/public/cpp" ]
     data_deps = [
       "//components/font_service",
